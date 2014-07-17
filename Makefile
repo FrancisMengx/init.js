@@ -6,6 +6,7 @@ usage:
 	@echo 'makee dev                        : Start the local development server'
 	@echo 'make test                        : Run tests'
 	@echo 'make testem 			                : Run testem for client and server units'
+	@echo 'make assets 										: Compile all the Stylus and Image'
 	@echo ''
 	@echo 'Additional tasks                 : Description'
 	@echo '--------------------             : -----------'
@@ -20,9 +21,15 @@ setup:
 	npm install
 
 dev:
+	$(MAKE) assets
 	npm start
 
 test:
-	mocha test
+	mocha /test
 
-
+assets:
+	@echo ''
+	@echo 'Compileing Assets ...'
+	@echo ''
+	stylus ./public/stylus/*.styl -o ./public/css
+	@echo ''

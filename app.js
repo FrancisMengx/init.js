@@ -19,7 +19,16 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(cookieParser());
-app.use(require('stylus').middleware(path.join(__dirname, 'public')));
+app.use(require('stylus').middleware({
+  src: __dirname + '/public/stylus', // .styl files are located in `views/stylesheets`
+  dest: __dirname + '/public/stylesheets', // .styl resources are compiled `/stylesheets/*.css`
+  compile: function (str, path, fn) { // optional, but recommended
+  stylus(str)
+  .set('filename', path)
+  .set('compress', true)
+  .render(fn);
+  }
+}));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', routes.index);
