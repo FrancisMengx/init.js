@@ -25,8 +25,7 @@ dev:
 	npm start
 
 test:
-	mocha /test
-
+	node node_modules/karma/bin/karma start test/karma.conf.js
 assets:
 	@echo ''
 	@echo 'Compileing Assets ...'
